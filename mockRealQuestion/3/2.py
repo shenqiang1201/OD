@@ -1,4 +1,4 @@
-# we are a team
+# we are a team （74分依旧有问题）
 n, m = map(int, input().split())
 msgs = [input().split() for _ in range(m)]
 
@@ -38,23 +38,26 @@ def getResult():
         print("Null")
         return
 
-    list_common = []
+    dict_common = {}
 
     for index in range(len(msgs)):
         if int(msgs[index][-1]) == 0:
-            if (msgs[index][0] in list_common) or (msgs[index][1] in list_common):
+            if dict_common.get(msgs[index][0]) is None:
+                dict_common[msgs[index][0]] = []
+            if dict_common.get(msgs[index][1]) is None:
+                dict_common[msgs[index][1]] = []
+            dict_common[msgs[index][0]].append(msgs[index][1])
+            dict_common[msgs[index][1]].append(msgs[index][0])
 
-            else:
-                list_common.append(msgs[index])
-
-            print(list_common)
-
+    for index in range(len(msgs)):
         if int(msgs[index][-1]) == 1:
-            for index_common in list_common:
-                if (msgs[index][0] in index_common) and (msgs[index][1] in index_common):
+            try:
+                if msgs[index][1] in dict_common.get(msgs[index][0]) or dict_common.get(msgs[index][0]) == dict_common.get(msgs[index][1]):
                     print("We are a team")
                 else:
                     print("We are not a team")
+            except:
+                print("We are not a team")
 
         if int(msgs[index][0]) < 1 or int(msgs[index][1]) > n or int(msgs[index][-1]) not in (0, 1):
             print("da pian zi")
