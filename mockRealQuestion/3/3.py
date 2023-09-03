@@ -14,7 +14,7 @@ def getResult():
     [1,5,2,0,2,4]
     9
     输出：
-    [5，2，2]
+    [5.2,2]
     输入：
     [-1,2,4,9]
     12
@@ -41,6 +41,7 @@ def getResult():
                 if dict_steps.get(k) is None:
                     dict_steps[k] = []
                 dict_steps[k].append([steps[left], steps[mid], steps[right]])
+
         # 左右边距移动
         if tag:
             left += 1
